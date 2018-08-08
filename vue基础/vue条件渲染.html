@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue条件渲染</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--v-if决定一个标签是否在页面上存在-->
+    <!--  if-else要紧贴在一起使用-->
+    <div v-if="show">{{message}}</div>
+    <div v-else>Bye Bye!</div>
+    <!--v-show在页面上存在，只是设置了display: none,v-if在页面上不存在-->
+    <!--带有 v-show 的元素始终会被渲染并保留在 DOM 中。v-show 只是简单地切换元素的 CSS 属性 display。-->
+   <!-- <div v-show="show">{{message}}</div>-->
+
+   <!-- 类似于 v-else，v-else-if 也必须紧跟在带 v-if 或者 v-else-if 的元素之后。-->
+    <div v-if="show==='a'">This is A</div>
+    <div v-else-if="show==='b'">This is B</div>
+    <div v-else>This is others</div>
+
+   <!-- Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染-->
+    <!--那么在下面的代码中切换 loginType 将不会清除用户已经输入的内容。因为两个模板使用了相同的元素，<input> 不会被替换掉——仅仅是替换了它的 placeholder。-->
+    <div v-if="loginType">
+        用户名:<input key="username"/>
+    </div>
+    <div v-else>
+        邮箱名:<input key="email"/>
+    </div>
+</div>
+<script>
+ var vm=new Vue({
+     el:'#app',
+     data:{
+         loginType:false,
+         show:'a',
+         message:'hello world'
+     }
+ });
+</script>
+</body>
+</html>

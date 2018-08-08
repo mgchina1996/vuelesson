@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在vue中使用插槽(作用域插槽)</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <child>
+       <!-- 定义一个不一样的 <template> 作为替代方案，并且可以通过 slot-scope 特性从子组件获取数据-->
+        <template slot-scope="props">
+            <h1>{{props.item}}</h1>
+        </template>
+    </child>
+</div>
+<script>
+    //在 2.5.0+，slot-scope 不再限制在 <template> 元素上使用，而可以用在插槽内的任何元素或组件上。
+    Vue.component('child',{
+        data:function(){
+            return {
+                list:[1,2,3,4]
+            }
+        },
+        template:`<div>
+<ul>
+ <slot v-for="item of list" :item="item">{{item}}</slot>
+</ul>
+</div>`
+    })
+    var vm=new Vue({
+        el:'#app',
+    })
+</script>
+</body>
+</html>

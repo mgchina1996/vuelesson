@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+<div>{{fullName}}</div>
+</div>
+<script>
+    var vm=new Vue({
+       el:'#app',
+       data:{
+           firstname:"Dell",
+           lastname:"Lee",
+           age:28
+        },
+        //依赖的值发生变化会重新计算
+        computed:{
+            fullName:{
+                get:function() {
+                    return  this.firstname+" "+this.lastname;
+                },
+                set:function (value) {
+                    var names = value.split(' ')
+                    this.firstname = names[0]
+                    this.lastname = names[names.length - 1]
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

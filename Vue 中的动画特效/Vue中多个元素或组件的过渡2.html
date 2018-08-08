@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中多个元素或组件的过渡(多个元素)</title>
+    <script src="../vue.js"></script>
+    <style>
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .5s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<!--多个组件的过渡简单很多 - 我们不需要使用 key 特性。相反，我们只需要使用动态组件-->
+<div id="app">
+    <transition name="fade" mode="in-out">
+        <component :is="type"></component>
+    </transition>
+    <button @click="handleClick">toggle</button>
+</div>
+<script>
+    Vue.component('child-one',{
+        template:'<div>child-one</div>'
+    })
+    Vue.component('child-two',{
+        template:'<div>child-two</div>'
+    })
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            type:'child-one'
+        },
+        methods:{
+            handleClick:function () {
+                this.type=this.type==='child-one'?'child-two':'child-one';
+            }
+        }
+    })
+</script>
+</body>
+</html>

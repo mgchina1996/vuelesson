@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue的样式绑定class</title>
+    <script src="../vue.js"></script>
+    <style>
+        .activated{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+   <!-- class对象绑定-->
+    <!--我们可以传给 v-bind:class 一个对象，以动态地切换 class：-->
+    <div  @click="handleDivClick"
+    :class="{activated:isActivated}"
+    >Hello world!</div>
+   <!-- 我们可以把一个数组传给 v-bind:class，以应用一个 class 列表-->
+    <div @click="handleDiv1Click"
+    :class="[activated,activatedOne]"
+    >Hello world!</div>
+</div>
+<script>
+var vm=new  Vue({
+    el:'#app',
+    data:{
+        isActivated:true,
+        activated:"",
+        activatedOne:"activated-one"
+    },
+    methods:{
+        handleDivClick:function () {
+            this.isActivated=! this.isActivated;
+        },
+        handleDiv1Click:function () {
+            if ( this.activated=="activated") {
+                this.activated="";
+            }
+            else{
+                this.activated="activated";
+            }
+        },
+    }
+});
+</script>
+</body>
+</html>

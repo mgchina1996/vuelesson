@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在vue中使用插槽</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <child>
+        <p>Dell</p>
+    </child>
+</div>
+<script>
+    Vue.component('child',{
+        //当组件渲染的时候，这个 <slot> 元素将会被替换为<p>Dell</p>.插槽内可以包含任何模板代码，包括 HTML
+        //如果<child>没有包含一个<slot>元素,则任何传入它的内容都会被抛弃。
+        template:'<div class="content"><p>Hello World</p><slot></slot></div>'
+    })
+    var vm=new Vue({
+        el:'#app',
+
+    })
+</script>
+</body>
+</html>

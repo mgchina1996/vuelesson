@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue实例</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="root" v-on:click="handleClick">
+{{message}}
+</div>
+<script>
+    //每个组件也是一个vue实例
+
+    //每个 Vue 应用都是通过用 Vue 函数创建一个新的 Vue 实例
+    var vm=new Vue({
+       /* 这个Vue实例接管对应元素dom的显示*/
+        el:'#root',
+        /*数据*/
+        data:{
+            message:'111'
+        },
+        methods:{
+            handleClick:function () {
+                console.log(this);
+            }
+        }
+    });
+</script>
+</body>
+</html>

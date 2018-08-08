@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中set方法</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+        <div v-for="(item,key,index) of userInfo">
+            {{item}}---{{key}}--{{index}}
+        </div>
+</div>
+<script>
+    //由于 JavaScript 的限制，Vue 不能检测对象属性的添加或删除
+    // 可以修改引用，视图也会变化
+    //可以使用 Vue.set(object, key, value) 方法向嵌套对象添加响应式属性
+    //你还可以使用 vm.$set 实例方法
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            userInfo:{
+                name:"Dell",
+                age:28,
+                gender:"male",
+                salary:"secret"
+            }
+        }
+    });
+</script>
+</body>
+</html>

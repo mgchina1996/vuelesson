@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件基础</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="components-demo">
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+</div>
+<script>
+    // 定义一个名为 button-counter 的新组件
+    //组件是可复用的 Vue 实例
+    //你可以将组件进行任意次数的复用
+    //每个组件都会各自独立维护它的 count。因为你每用一次组件，就会有一个它的新实例被创建。
+
+    //全局注册和局部注册
+    //全局注册的组件可以用在其被注册之后的任何 (通过 new Vue) 新创建的 Vue 根实例，也包括其组件树中的所有子组件的模板中。
+    Vue.component('button-counter', {
+        //全局注册的组件可以用在其被注册之后的任何 (通过 new Vue) 新创建的 Vue 根实例，也包括其组件树中的所有子组件的模板中。
+        props:[],
+       /* 一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝*/
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<button @click="count++">You clicked me {{ count }} times.</button>'
+    })
+    //Vue根实例
+    new Vue({ el: '#components-demo' })
+
+</script>
+</body>
+</html>

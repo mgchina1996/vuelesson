@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在vue中使用插槽2(具名插槽)</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <base-layout>
+        <template slot="header">
+            <h1>Here might be a page title</h1>
+        </template>
+        <p>A paragraph for the main content.</p>
+        <p>And another one.</p>
+        <template slot="footer">
+            <p>Here's some contact info</p>
+        </template>
+    </base-layout>
+    <base-layout>
+        <h1 slot="header">Here might be a page title</h1>
+        <p>A paragraph for the main content.</p>
+        <p>And another one.</p>
+        <p slot="footer">Here's some contact info</p>
+    </base-layout>
+</div>
+<script>
+    //我们还是可以保留一个未命名插槽，这个插槽是默认插槽，也就是说它会作为所有未匹配到插槽的内容的统一出口
+    Vue.component('base-layout',{
+        template:`<div class="container">
+  <header>
+    <slot name="header"></slot>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
+</div>`
+    })
+    var vm=new Vue({
+        el:'#app',
+    })
+</script>
+</body>
+</html>

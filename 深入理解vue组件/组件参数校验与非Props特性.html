@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件参数校验与非Props特性</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="root">
+<child :content="'abc111'"></child>
+</div>
+<script>
+    //一个非 prop 特性是指传向一个组件，但是该组件并没有相应 prop 定义的特性。
+    //父组件传子组件不接，再标签上显示
+    //props特性,特性不会再标签上显示,可以通过this或擦汗之表达式取出特性，父组件传子组件接
+    Vue.component('child',{
+        props:{
+            /*content:[Number,String]*/
+            content:{
+                type:String,
+                /*required:true,
+                default:'default value'*/
+                //自定义校验器
+                validator:function (value) {
+                    return value.length>5
+                }
+            }
+        },
+        template:'<div>{{content}}</div>'
+    })
+    var vm=new Vue({
+        el:'#root',
+    })
+</script>
+</body>
+</html>

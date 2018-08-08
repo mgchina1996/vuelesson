@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中列表渲染</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+   <!-- 当 Vue.js 用 v-for 正在更新已渲染过的元素列表时，它默认用“就地复用”策略-->
+<!--    <div v-for="(item,index) of list"
+         :key="item.id">
+        {{item.id+":"+item.text}}
+    </div>
+    <span v-for="(item,index) of list"
+          :key="item.id">
+        {{item.text}}
+    </span>-->
+   <!-- template占位符,可以包裹一些元素,但不会渲染到页面-->
+    <template v-for="(item,index) of list">
+        <div
+        :key="item.id">
+        {{item.id+":"+item.text}}
+        </div>
+        <span
+        :key="item.id">
+        {{item.text}}
+         </span>
+    </template>
+</div>
+<script>
+    //Vue 包含一组观察数组的变异方法，所以它们也将会触发视图更新
+   /* 由于 JavaScript 的限制，Vue 不能检测以下变动的数组：
+    当你利用索引直接设置一个项时，例如：vm.items[indexOfItem] = newValue
+    当你修改数组的长度时，例如：vm.items.length = newLength*/
+   //1.变异方法push pop shift unshift splice sort reverse
+    //2.改变数组引用页面也会变化
+    //3.set方法
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            list:[{
+                id:"01230",
+                 text:"hello"
+            },
+                {
+                    id:"01220",
+                    text:"dell"
+                },
+                {
+                    id:"01240",
+                    text:"lee"
+                },
+                {
+                    id:"01250",
+                    text:"fff"
+                }]
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中多个元素或组件的过渡(多个元素)</title>
+    <script src="../vue.js"></script>
+    <style>
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .5s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<!--当有相同标签名的元素切换时，需要通过 key 特性设置唯一的值来标记以让 Vue 区分它们，否则 Vue 为了效率只会替换相同标签内部的内容。
+即使在技术上没有必要，给在 <transition> 组件中的多个元素设置 key 是一个更好的实践。-->
+<!--同时生效的进入和离开的过渡不能满足所有要求，所以 Vue 提供了 过渡模式
+in-out：新元素先进行过渡，完成之后当前元素过渡离开。
+out-in：当前元素先进行过渡，完成之后新元素过渡进入。-->
+<div id="app">
+    <transition name="fade" mode="in-out">
+        <div v-if="show" key="hello">Hello World!</div>
+        <div v-else key="bye">Bye World</div>
+    </transition>
+    <button @click="handleClick">toogle</button>
+</div>
+<script>
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            show:true
+        },
+        methods:{
+            handleClick:function () {
+                this.show=!this.show;
+            }
+        }
+    })
+</script>
+</body>
+</html>

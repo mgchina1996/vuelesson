@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model='inputValue'/>
+    <button v-on:click="handleBtnClick">提交</button>
+    <ul>
+        <!--<li v-for="item in list">{{item}}</li>-->
+       <!-- 创建一个Todoitem组件实例-->
+       <!-- :content和v-bind：content一样-->
+        <todo-item :content="item"
+                  v-bind:index="index"
+                  v-for="(item,index) in list"
+                  @delete="handleItemDelete">
+
+        </todo-item>
+    </ul>
+</div>
+<script>
+    //前端组件化
+    //一个组件就是一个区域
+    //定义名为Todoitem的新组件
+
+    //全局组件
+/*    Vue.component('Todoitem',{
+        //组件现在接受一个
+        // "prop"，类似于一个自定义特性。
+        // 这个 prop 名为
+        props:['content'],
+        template:"<li>{{content}}</li>"
+    });*/
+
+    //局部组件
+    //应该注册到Vue实例中
+    //子组件向父组件传值
+    var TodoItem={
+        props:['content','index'],
+        template:"<li @click='handleItemClick'>{{content}}</li>",
+        methods: {
+            handleItemClick:function () {
+                //向一层触发事件
+                this.$emit('delete',this.index);
+            }
+        }
+    };
+    var app=new Vue({
+        el:'#app',
+        components:{
+            TodoItem:TodoItem,
+        },
+        data:{
+            list:[],
+            inputValue:''
+        },
+        methods:{
+            handleBtnClick:function () {
+                this.list.push(this.inputValue)
+                this.inputValue='';
+            },
+            handleItemDelete:function (index) {
+                this.list.splice(index,1);
+            }
+        }
+    });
+</script>
+</body>
+</html>

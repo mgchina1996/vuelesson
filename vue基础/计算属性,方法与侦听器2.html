@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>方法</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{fullName()}}{{age}}
+</div>
+<script>
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            firstname:"Dell",
+            lastname:"Lee",
+            age:28
+        },
+        //每当触发重新渲染时，调用方法将总会再次执行函数。
+        methods:{
+            fullName:function () {
+                console.log('计算了一次');
+                return this.firstname+" "+this.lastname;
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList Jquery</title>
+    <script src="../vue.js"></script>
+    <script src="../jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div>
+    <input id="inp" type="text"/>
+    <button id="btn">提交</button>
+    <ul id="list"></ul>
+</div>
+<script>
+    //mvp设计模式的
+    //m模型层
+    //v视图
+    //p控制器，控制器控制所有代码逻辑
+function Page() {
+    
+}
+$.extend(Page.prototype,{
+    init:function () {
+        this.bindEvents();
+    },
+    bindEvents:function () {
+        var btn=$('#btn');
+        btn.on('click',$.proxy(this.handleBtnClick,this))
+    },
+    handleBtnClick:function () {
+        var inputValue=$('#inp').val();
+        var ulEle=$('#list');
+        ulEle.append('<li>'+inputValue+'</li>');
+        $('#inp').val('');
+    }
+})
+    var page=new Page();
+    page.init();
+</script>
+<script>
+</script>
+</body>
+</html>

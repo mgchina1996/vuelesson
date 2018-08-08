@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+<!--    三个语法中都可以写js表达式-->
+<!--    插值表达式{{name}}双大括号会将数据解释为普通文本-->
+    {{name+'Lee'}}
+<!--v-text让div的textContent内容变为data里面的内容-->
+<div v-text="name+'lee' "></div>
+<!--v-html对应innerHtml,会解析数据，而上面两种只会解析为普通文本-->
+<div v-html="name+'lee'"></div>
+</div>
+<script>
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            name:'<h1>dell</h1>'
+        }
+    });
+</script>
+</body>
+</html>
